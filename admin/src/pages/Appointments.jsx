@@ -58,7 +58,7 @@ const Appointments = () => {
             {/* PATIENT */}
             <div className="flex items-center gap-2">
               <img
-                src={appointment.userData.image?.startsWith("http") ? appointment.userData.image : `${backendUrl}/${appointment.userData.image?.replace(/\\\\/g, "/")}`}
+                src={appointment.userData.image}
                 alt=""
                 className="w-8 rounded-full bg-gray-100"
               />
@@ -76,7 +76,7 @@ const Appointments = () => {
             {/* DOCTOR */}
             <div className="flex items-center gap-2">
               <img
-                src={appointment.docData.image?.startsWith("http") ? appointment.docData.image : `${backendUrl}/${appointment.docData.image?.replace(/\\\\/g, "/")}`}
+                src={appointment.docData.image}
                 alt=""
                 className="w-8 rounded-full bg-gray-100"
               />
