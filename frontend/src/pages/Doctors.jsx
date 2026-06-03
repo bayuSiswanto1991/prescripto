@@ -50,7 +50,7 @@ const Doctors = () => {
             >
               {/* FOTO DOKTER */}
               <div className="w-full bg-blue-50">
-                <img src={`http://localhost:4000/${doctor.image.replace(/\\/g, "/")}`} alt={doctor.name} />
+                <img src={doctor.image} alt={doctor.name} />
               </div>
               <div className="flex flex-col gap-1 p-4">
                 {/* NAMA DAN SPESIALIS */}

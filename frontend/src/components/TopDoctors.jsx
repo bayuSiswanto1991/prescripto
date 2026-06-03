@@ -21,7 +21,7 @@ const TopDoctors = () => {
             onClick={() => navigate(`/appointment/${doctor._id}`)}
           >
             <div className="w-full bg-blue-50">
-              <img src={`http://localhost:4000/${doctor.image.replace(/\\/g, "/")}`} alt={doctor.name} />
+              <img src={doctor.image} alt={doctor.name} />
             </div>
             <div className="flex flex-col gap-1 p-4">
               <div className="flex items-center gap-2">
