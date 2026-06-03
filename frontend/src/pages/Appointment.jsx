@@ -135,7 +135,7 @@ const Appointment = () => {
           {/* INFO DOKTER */}
           <div className="flex flex-col sm:flex-row gap-4">
             <div>
-              <img src={`http://localhost:4000/${docInfo.image.replace(/\\/g, "/")}`} alt={docInfo.name} className="w-full bg-primary rounded-lg sm:max-w-72" />
+              <img src={docInfo.image} alt={docInfo.name} className="w-full bg-primary rounded-lg sm:max-w-72" />
             </div>
             <div className="flex-1 border border-gray-600 rounded-lg p-8 flex flex-col gap-2">
               <p className="flex items-center gap-2 text-xl">
