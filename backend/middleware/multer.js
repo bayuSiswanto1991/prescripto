@@ -1,30 +1,23 @@
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
-const path = require("path");
 
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "uploads/");
-  },
+// konfigurasi cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
 
-  filename: (req, file, callback) => {
-    const uniqueName = Date.now() + path.extname(file.originalname);
-    callback(null, uniqueName);
+// storage clodinaru - upload langsung ke cloud
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "prescripto",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
   },
 });
 
-const fileFilter = (req, file, callback) => {
-  const allowdTypes = ["image/jpeg", "image/jpg", "image/png"];
-
-  if (allowdTypes.includes(file.mimetype)) {
-    callback(null, true);
-  } else {
-    callback(new Error("Hanya file gambar yang diizinkan!"), false);
-  }
-};
-
-const upload = multer({
-  storage: storage,
-  fileFilter: fileFilter,
-});
+const upload = multer({ storage });
 
 module.exports = upload;
