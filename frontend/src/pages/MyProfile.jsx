@@ -24,7 +24,8 @@ const MyProfile = () => {
     formData.append("dob", userData.dob);
     formData.append("gender", userData.gender);
     formData.append("address", JSON.stringify(userData.address));
-    if (userData.image && userData.image !== userData.image) {
+
+    if (userData.image instanceof File) {
       formData.append("image", userData.image);
     }
 
