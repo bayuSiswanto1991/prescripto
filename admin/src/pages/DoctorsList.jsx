@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { AdminContext } from "../context/AdminContext";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const DoctorsList = () => {
   const { aToken, doctors, fetchDoctors } = useContext(AdminContext);
 
   // toggle available dokter
   const toggleAvailable = async (docId) => {
-    const res = await fetch(`http://localhost:4000/api/admin/toggle-available/${docId}`, {
+    const res = await fetch(`${backendUrl}/api/admin/toggle-available/${docId}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${aToken}` },
     });
@@ -26,7 +27,7 @@ const DoctorsList = () => {
         {doctors.map((doctor, index) => (
           <div key={index} className="border border-[#C9D8FF] rounded-xl overflow-hidden hover:translate-y-[-5px] transition-all">
             {/* FOTO */}
-            <img src={`http://localhost:4000/${doctor.image.replace(/\\/g, "/")}`} alt={doctor.name} className=" w-full bg-[#EAEFFF] " />
+            <img src={`${backendUrl}/${doctor.image.replace(/\\\\/g, "/")}`} alt={doctor.name} className=" w-full bg-[#EAEFFF] " />
             {/* INFO */}
             <div className=" p-4">
               <p className=" font-medium text-gray-800">{doctor.name}</p>

@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { AdminContext } from "../context/AdminContext";
 import { assets } from "../assets/assets_admin/assets";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Dashboard = () => {
   const { aToken } = useContext(AdminContext);
   const [dashData, setDashData] = useState(null);
 
   const fetchDashData = async () => {
-    const res = await fetch("http://localhost:4000/api/admin/dashboard", {
+    const res = await fetch(`${backendUrl}/api/admin/dashboard`, {
       headers: { Authorization: `Bearer ${aToken}` },
     });
 
@@ -67,7 +68,7 @@ const Dashboard = () => {
             <div key={index} className="flex items-center gap-4 px-6 py-3 border-b hover:bg-gray-50">
               {/* FOTO DOKTER */}
               <img
-                src={appointment.docData.image?.startsWith("http") ? appointment.docData.image : `http://localhost:4000/${appointment.docData.image?.replace(/\\/g, "/")}`}
+                src={appointment.docData.image?.startsWith("http") ? appointment.docData.image : `${backendUrl}/${appointment.docData.image?.replace(/\\\\/g, "/")}`}
                 alt=""
                 className="w-10 rounded-full bg-gray-100"
               />

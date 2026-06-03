@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const AdminContext = createContext();
 
@@ -11,7 +12,7 @@ const AdminContexProvider = ({ children }) => {
   const [doctors, setDoctors] = useState([]);
 
   const fetchDoctors = async () => {
-    const res = await fetch("http://localhost:4000/api/admin/all-doctor", {
+    const res = await fetch(`${backendUrl}/api/admin/all-doctor`, {
       headers: { Authorization: `Bearer ${aToken}` },
     });
     const data = await res.json();

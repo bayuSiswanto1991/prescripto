@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/AppContext";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const MyAppointments = () => {
   const { token } = useContext(AppContext);
@@ -7,7 +8,7 @@ const MyAppointments = () => {
 
   const fetchAppointments = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/user/my-appointments", {
+      const res = await fetch(`${backendUrl}/api/user/my-appointments`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -24,7 +25,7 @@ const MyAppointments = () => {
   };
 
   const cancelAppointment = async (appointmentId) => {
-    const res = await fetch(`http://localhost:4000/api/user/cancel-appointment/${appointmentId}`, {
+    const res = await fetch(`${backendUrl}/api/user/cancel-appointment/${appointmentId}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -55,7 +56,7 @@ const MyAppointments = () => {
                 {/* FOTO DOKTER */}
                 <div className="w-40 bg-[#EAEFFF]">
                   <img
-                    src={appointment.docData.image?.startsWith("http") ? appointment.docData.image : `http://localhost:4000/${appointment.docData.image?.replace(/\\/g, "/")}`}
+                    src={appointment.docData.image?.startsWith("http") ? appointment.docData.image : `${backendUrl}/${appointment.docData.image?.replace(/\\\\/g, "/")}`}
                     alt=""
                     className="w-full"
                   />

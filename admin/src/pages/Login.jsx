@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AdminContext } from "../context/AdminContext";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +10,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:4000/api/admin/login", {
+    const res = await fetch(`${backendUrl}/api/admin/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

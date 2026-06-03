@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AdminContext } from "../context/AdminContext";
 import { assets } from "../assets/assets_admin/assets";
 import { useState } from "react";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const AddDoctor = () => {
   const { aToken, fetchDoctors } = useContext(AdminContext);
@@ -34,7 +35,7 @@ const AddDoctor = () => {
     formData.append("fees", fees);
     formData.append("address", JSON.stringify({ line1: address1, line2: address2 }));
 
-    const res = await fetch("http://localhost:4000/api/admin/add-doctor", {
+    const res = await fetch(`${backendUrl}/api/admin/add-doctor`, {
       method: "POST",
       headers: { Authorization: `Bearer ${aToken}` },
       // tidak pakai content - type - biar browser set otomatis untuk FormData

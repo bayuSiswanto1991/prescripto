@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const MyProfile = () => {
   const { token } = useContext(AppContext);
@@ -7,7 +8,7 @@ const MyProfile = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   const fetchProfile = async () => {
-    const res = await fetch("http://localhost:4000/api/user/profile", {
+    const res = await fetch(`${backendUrl}/api/user/profile`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
@@ -27,7 +28,7 @@ const MyProfile = () => {
       formData.append("image", userData.image);
     }
 
-    const res = await fetch("http://localhost:4000/api/user/update-profile", {
+    const res = await fetch(`${backendUrl}/api/user/update-profile`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
@@ -56,11 +57,7 @@ const MyProfile = () => {
           <label htmlFor="profile-img">
             <img
               src={
-                userData.image instanceof File
-                  ? URL.createObjectURL(userData.image)
-                  : userData.image?.startsWith("http")
-                    ? userData.image
-                    : `http://localhost:4000/${userData.image?.replace(/\\/g, "/")}`
+                userData.image instanceof File ? URL.createObjectURL(userData.image) : userData.image?.startsWith("http") ? userData.image : `${backendUrl}/${userData.image?.replace(/\\\\/g, "/")}`
               }
               alt=""
               className="w-24 h-24 rounded-full object-cover cursor-pointer bg-gray-100"

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { assets } from "../assets/assets_frontend/assets";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Appointment = () => {
   const { docId } = useParams();
@@ -30,7 +31,7 @@ const Appointment = () => {
     const slotDate = `${date.getDate()}_${date.getMonth() + 1}_${date.getFullYear()}`;
 
     // kirim ke backend
-    const res = await fetch("http://localhost:4000/api/user/book-appointment", {
+    const res = await fetch(`${backendUrl}/api/user/book-appointment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

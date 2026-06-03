@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { AdminContext } from "../context/AdminContext";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
   const { aToken } = useContext(AdminContext);
 
   const fetchAppointments = async () => {
-    const res = await fetch("http://localhost:4000/api/admin/appointments", {
+    const res = await fetch(`${backendUrl}/api/admin/appointments`, {
       headers: { Authorization: `Bearer ${aToken}` },
     });
 
@@ -17,7 +18,7 @@ const Appointments = () => {
   };
 
   const handleAppoinmentCancel = async (appointmentId) => {
-    const res = await fetch(`http://localhost:4000/api/admin/cancel-appointment/${appointmentId}`, {
+    const res = await fetch(`${backendUrl}/api/admin/cancel-appointment/${appointmentId}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${aToken}` },
     });
@@ -56,7 +57,11 @@ const Appointments = () => {
 
             {/* PATIENT */}
             <div className="flex items-center gap-2">
-              <img src={appointment.userData.image?.startsWith("http") ? appointment.userData.image : `http://localhost:4000/${appointment.userData.image?.replace(/\\/g, "/")}`} alt="" className="w-8 rounded-full bg-gray-100" />
+              <img
+                src={appointment.userData.image?.startsWith("http") ? appointment.userData.image : `${backendUrl}/${appointment.userData.image?.replace(/\\\\/g, "/")}`}
+                alt=""
+                className="w-8 rounded-full bg-gray-100"
+              />
               <p>{appointment.userData.name}</p>
             </div>
 
@@ -70,7 +75,11 @@ const Appointments = () => {
 
             {/* DOCTOR */}
             <div className="flex items-center gap-2">
-              <img src={appointment.docData.image?.startsWith("http") ? appointment.docData.image : `http://localhost:4000/${appointment.docData.image?.replace(/\\/g, "/")}`} alt="" className="w-8 rounded-full bg-gray-100" />
+              <img
+                src={appointment.docData.image?.startsWith("http") ? appointment.docData.image : `${backendUrl}/${appointment.docData.image?.replace(/\\\\/g, "/")}`}
+                alt=""
+                className="w-8 rounded-full bg-gray-100"
+              />
               <p>{appointment.docData.name}</p>
             </div>
 

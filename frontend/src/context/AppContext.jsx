@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 // buat gudang kosong
 export const AppContext = createContext();
@@ -12,7 +13,7 @@ const AppContextProvider = ({ children }) => {
   const [doctors, setDoctors] = useState([]);
 
   const fetchDoctor = async () => {
-    const res = await fetch("http://localhost:4000/api/doctor/list");
+    const res = await fetch(`${backendUrl}/api/doctor/list`);
     const data = await res.json();
     if (data.success) {
       setDoctors(data.doctors);

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 // ─────────────────────────────────────
 // HALAMAN LOGIN & REGISTER
@@ -31,7 +32,7 @@ const Login = () => {
 
     if (state === "Sign Up") {
       // REGISTER - kirim name, email, password ke API
-      const res = await fetch("http://localhost:4000/api/user/register", {
+      const res = await fetch(`${backendUrl}/api/user/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -45,7 +46,7 @@ const Login = () => {
       }
     } else {
       // LOGIN — kirim email + password saja (tidak butuh name)
-      const res = await fetch("http://localhost:4000/api/user/login", {
+      const res = await fetch(`${backendUrl}/api/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
