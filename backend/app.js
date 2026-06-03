@@ -1,7 +1,7 @@
+require("dotenv").config(); // ← load .env file
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-require("dotenv").config(); // ← load .env file
 
 // ─────────────────────────────────────
 // IMPORT ROUTES
