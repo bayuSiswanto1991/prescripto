@@ -27,7 +27,7 @@ const DoctorsList = () => {
         {doctors.map((doctor, index) => (
           <div key={index} className="border border-[#C9D8FF] rounded-xl overflow-hidden hover:translate-y-[-5px] transition-all">
             {/* FOTO */}
-            <img src={`${backendUrl}/${doctor.image.replace(/\\\\/g, "/")}`} alt={doctor.name} className=" w-full bg-[#EAEFFF] " />
+            <img src={doctor.image} alt={doctor.name} className=" w-full bg-[#EAEFFF] " />
             {/* INFO */}
             <div className=" p-4">
               <p className=" font-medium text-gray-800">{doctor.name}</p>
